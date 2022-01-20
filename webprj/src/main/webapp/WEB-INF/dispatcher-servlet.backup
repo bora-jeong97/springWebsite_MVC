@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- 위는 beens와 mvc 태그를 쓸 수 있게 해주는 설정 -->
+
+
+	<!-- controller 매핑 -->
+	<!-- /index의 /는 루트에서 부터 해당 이름을 찾아간다는 것이다 -->
+	<!-- 여기서 name은 listController의 setter(입력명)이며, ref="noticeService"는 
+	아래 noticeService id를 가진 JDBCNoticeService를 말하는 것이다  -->
+	<bean id="/index"
+		class="com.newlecture.web.controller.IndexController" />
+	<bean id="/notice/list"
+		class="com.newlecture.web.controller.notice.ListController" >
+		<property name="noticeService" ref="noticeService" />
+	</bean>	
+	<bean id="/notice/detail"
+		class="com.newlecture.web.controller.notice.DetailController" />
+
+
+
+	<!-- tiles view 매핑 -->
+	<bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles.xml" />
+	</bean>
+
+
+
+	<!-- controller 긴 주소 입력을 간략화하기 위한 코드 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"></property>
+		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="2" />
+	</bean>
+
+	<!-- 정적인 파일을 동작하기 위해 static에 정적 파일을 모아놓고 주소를 매핑해준다 -->
+	<mvc:resources location="/static/" mapping="/**"></mvc:resources>
+	
+	
+	<!-- Service -->
+	<!-- ioc container에 담는다. 객체를 클래스에 생성하지 않아도 여기에 하면 된다 -->
+	<bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" >
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- jdbc -->
+	<!-- property name은 setter이름이다 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name ="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name ="url" value="jdbc:oracle:thin:@localhost:1521/xepdb1"/>
+		<property name ="username" value="NEWLEC" />
+		<property name ="password" value="7731" />
+	</bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

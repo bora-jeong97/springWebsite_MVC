@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 위는 beens과 mvc, context(어노테이션) 태그를 쓸 수 있게 해주는 설정 -->
+
+
+	<context:annotation-config />
+	
+	
+	<!-- jdbc -->
+	<!-- property name은 setter이름이다 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name ="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name ="url" value="jdbc:oracle:thin:@localhost:1521/xepdb1"/>
+		<property name ="username" value="NEWLEC" />
+		<property name ="password" value="7731" />
+	</bean>
+
+	<!-- Service -->
+	<!-- ioc container에 담는다. 객체를 클래스에 생성하지 않아도 여기에 하면 된다 -->
+	<bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" >
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+	</bean>
+
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
