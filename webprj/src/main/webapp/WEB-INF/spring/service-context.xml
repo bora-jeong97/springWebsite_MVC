@@ -12,8 +12,9 @@
 	<!-- 위는 beens과 mvc, context(어노테이션) 태그를 쓸 수 있게 해주는 설정 -->
 
 
-	<context:annotation-config />
-	
+<!-- 	<context:annotation-config /> -->
+<!-- 아래 패키지를 객체화 한뒤에 그 안쪽에 있는 어노테이션이 뭐가 있는 지 스캔한다  -->
+	<context:component-scan base-package="com.newlecture.web.service" />
 	
 	<!-- jdbc -->
 	<!-- property name은 setter이름이다 -->
@@ -26,9 +27,9 @@
 
 	<!-- Service -->
 	<!-- ioc container에 담는다. 객체를 클래스에 생성하지 않아도 여기에 하면 된다 -->
-	<bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" >
+<!-- 	<bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" > -->
 <!-- 		<property name="dataSource" ref="dataSource" /> -->
-	</bean>
+<!-- 	</bean> -->
 
 
 </beans>
